@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let courseMap = new Map();
 
-     // Init
+    // Init
     form.addEventListener('submit', saveStudent);
 
     loadCourses().then(() => {
@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 newRow.innerHTML = `
                     <th scope="row">${student.id}</th>
                     <td>${student.name}</td>
-                    <td>${student.email}</td>
-                    <td style="min-width: 150px;">${formatPhone(student.phone)}</td>
-                    <td style="min-width: 200px;">${courseName}</td>
-                    <td>${student.period}º</td>
+                    <td class="d-none d-md-table-cell">${student.email}</td>
+                    <td class="d-none d-md-table-cell" style="min-width: 150px;">${formatPhone(student.phone)}</td>
+                    <td class="d-none d-md-table-cell" style="min-width: 200px;">${courseName}</td>
+                    <td class="d-none d-md-table-cell">${student.turno}</td>
                 `;
                 tabelaBody.appendChild(newRow);
             });
@@ -78,16 +78,14 @@ document.addEventListener('DOMContentLoaded', function () {
     async function saveStudent(event) {
         event.preventDefault();
 
-        // Coleta os valores do formulário
         const studentData = {
             name: document.getElementById('nome').value.trim(),
             email: document.getElementById('email').value.trim(),
             phone: telefoneInput.value.replace(/\D/g, ''),
             idCurso: parseInt(cursosSelect.value),
-            period: parseInt(document.querySelector('input[name="periodo"]:checked').value)
+            turno: document.querySelector('input[name="turno"]:checked').value
         };
         
-        // Validação simples
         if (!studentData.name || !studentData.email || !studentData.phone || !studentData.idCurso) {
             alert('Por favor, preencha todos os campos obrigatórios.');
             return;
@@ -103,8 +101,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (!response.ok) {
-                 const errorData = await response.json();
-                 throw new Error(errorData.message || 'Erro ao salvar o estudante.');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Erro ao salvar o estudante.');
             }
             
             alert('Estudante cadastrado com sucesso!');

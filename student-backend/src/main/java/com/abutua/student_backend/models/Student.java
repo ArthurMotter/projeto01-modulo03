@@ -7,16 +7,16 @@ public class Student {
     private String email;
     private String phone;
     private int idCurso;
-    private int period;
+    private String turno;
 
     // Construtor
-    public Student(int id, String name, String email, String phone, int idCurso, int period) {
+    public Student(int id, String name, String email, String phone, int idCurso, String turno) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.idCurso = idCurso;
-        this.period = period;
+        this.turno = turno; 
     }
 
     // Methods
@@ -60,11 +60,11 @@ public class Student {
         this.idCurso = idCurso;
     }
 
-    public int getPeriod() {
-        return period;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setPeriod(int period) {
-        this.period = period;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 }
